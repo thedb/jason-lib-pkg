@@ -83,7 +83,7 @@ export function getUrlParams() {
     const paramsString = url.split('?')[1];
     const paramsArr = paramsString.split('&');
     for(let i = 0; i < paramsArr.length; i ++) {
-      params[paramsArr[i].split('=')[0]] = decodeURIComponent(paramsArr[i].split("=")[1]).replace(/#\//, '');
+      params[paramsArr[i].split('=')[0]] = decodeURIComponent(paramsArr[i].split("=")[1]).replace(/#\/.*/, '');
     }
   }
   return params;
