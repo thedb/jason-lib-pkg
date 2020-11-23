@@ -57,15 +57,16 @@ export async function addImg(src) {
  * @param {Object} img 
  * @param {Number} ratio 压缩倍率
  * @param {Number} encoderOptions 压缩精度 0~1 
+ * @param {String} type  image/png, 默认格式为image/png
  */
-export async function canvasCompress(img, ratio = 1, encoderOptions = 1) {
+export async function canvasCompress(img, ratio = 1, encoderOptions = 1, type = 'image/png') {
   return new Promise(async(resolve) => {
     const canvas = document.createElement('canvas');
     canvas.width = img.naturalWidth / ratio
     canvas.height = img.naturalHeight / ratio;
     const ctx = canvas.getContext('2d');
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    const compress = await canvasToBlob(canvas, 'image/jpeg', encoderOptions);
+    const compress = await canvasToBlob(canvas, type, encoderOptions);
     // 二进制图片;
     const compressImage = await blobToImg(compress); 
     // Image对象
