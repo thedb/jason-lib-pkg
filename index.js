@@ -19,14 +19,26 @@ export function blobToImg(blob) {
 /**
  * 
  * @param {*} canvas 
- * @param {DOMString} type 指定图片格式，默认格式为image/png
+ * @param {DOMString} type 指定图片格式，可选格式为image/jpeg || image/png
  * @param {Number} encoderOptions 值在0与1之间，当请求图片格式为image/jpeg或者image/webp时用来指定图片展示质量。
  */
-export function canvasToBlob(canvas, type, encoderOptions) {
+export function canvasToBlob(canvas, type = 'image/png', encoderOptions = 1) {
   return new Promise((resolve) => {
     canvas.toBlob((blob) => {
       resolve(blob)
     }, type, encoderOptions)
+  })
+}
+
+/**
+ * 
+ * @param {*} canvas 
+ * @param {DOMString} type 指定图片格式，可选格式为image/jpeg || image/png
+ */
+export function canvasToBase64(canvas, type = 'image/png', encoderOptions = 1) {
+  return new Promise((resolve) => {
+    const base64 = canvas.toDataURL(type, encoderOptions);
+    resolve(base64);
   })
 }
 
